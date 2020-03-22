@@ -1,0 +1,44 @@
+[sc_front]
+ansible-front
+
+[sc_server]
+ansible-server-sc1
+ansible-server-sc2
+ansible-server-sc3
+
+[tc_server]
+ansible-server-tc1
+
+[zb_server]
+ansible-server-zb1
+
+[sc_server_admin]
+ansible-server-admin
+
+# front in all geos
+[front:children]
+sc_front
+
+# server in all geos
+[server:children]
+sc_server
+tc_server
+zb_server
+
+# server admin in all geos
+[server_admin:children]
+sc_server_admin
+
+# everything in the sc geo
+[sc:children]
+sc_front
+sc_server
+sc_server_admin
+
+# everything in the tc geo
+[tc:children]
+tc_server
+
+# everything in the zb geo
+[tc:children]
+zb_server

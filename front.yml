@@ -1,0 +1,5 @@
+---
+- hosts: sc_front
+  gather_facts: no
+  roles:
+    - nginx
