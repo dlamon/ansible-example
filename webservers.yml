@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  gather_facts: no
+  tasks:
+    - name: 导入 nginx 角色
+      import_role:
+        name: nginx
+      become: yes
+      become_method: su
+    - name: 导入 ansible-front 角色
+      import_role:
+        name: ansible-front
+      tags: "version deploy"

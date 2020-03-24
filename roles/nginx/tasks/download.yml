@@ -1,0 +1,45 @@
+---
+  - name: 导入 download 变量
+    include_vars:
+      file: download.yml
+  - name: 创建下载子目录
+    file:
+      path: "/root/downloads/{{ item }}"
+      state: directory
+    loop: "{{ download_sub_dirs }}"
+  - name: 下载 gcc 安装文件
+    get_url:
+      url: "{{ filesvr_url }}/{{ gcc_context }}/{{ item }}"
+      dest: "/root/downloads/gcc/{{ item }}"
+      force: yes
+    loop: "{{ gcc_files }}"
+  - name: 下载 gcc-c++ 安装文件
+    get_url:
+      url: "{{ filesvr_url }}/{{ gcc_c_context }}/{{ item }}"
+      dest: "/root/downloads/gcc-c++/{{ item }}"
+      force: yes
+    loop: "{{ gcc_c_files }}"
+  - name: 下载 openssl 安装文件
+    get_url:
+      url: "{{ filesvr_url }}/{{ openssl_context }}/{{ item }}"
+      dest: "/root/downloads/openssl/{{ item }}"
+      force: yes
+    loop: "{{ openssl_files }}"
+  - name: 下载 pcre 安装文件
+    get_url:
+      url: "{{ filesvr_url }}/{{ pcre_context }}/{{ item }}"
+      dest: "/root/downloads/pcre/{{ item }}"
+      force: yes
+    loop: "{{ pcre_files }}"
+  - name: 下载 zlib 安装文件
+    get_url:
+      url: "{{ filesvr_url }}/{{ zlib_context }}/{{ item }}"
+      dest: "/root/downloads/zlib/{{ item }}"
+      force: yes
+    loop: "{{ zlib_files }}"
+  - name: 下载 nginx 安装文件
+    get_url:
+      url: "{{ filesvr_url }}/{{ nginx_context }}/{{ item }}"
+      dest: "/root/downloads/nginx/{{ item }}"
+      force: yes
+    loop: "{{ nginx_files }}"

@@ -1,0 +1,3 @@
+---
+- name: ansible-front 测试
+  shell: "ls -ltr"

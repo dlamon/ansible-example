@@ -1,44 +1,44 @@
-[sc_front]
+[sc_webservers]
 ansible-front
 
-[sc_server]
+[sc_appservers]
 ansible-server-sc1
 ansible-server-sc2
 ansible-server-sc3
 
-[tc_server]
+[tc_appservers]
 ansible-server-tc1
 
-[zb_server]
+[zb_appservers]
 ansible-server-zb1
 
-[sc_server_admin]
+[sc_manageservers]
 ansible-server-admin
 
-# front in all geos
-[front:children]
-sc_front
+# webservers in all geos
+[webservers:children]
+sc_webservers
 
-# server in all geos
-[server:children]
-sc_server
-tc_server
-zb_server
+# appservers in all geos
+[appservers:children]
+sc_appservers
+tc_appservers
+zb_appservers
 
-# server admin in all geos
-[server_admin:children]
-sc_server_admin
+# manageservers in all geos
+[manageservers:children]
+sc_manageservers
 
 # everything in the sc geo
 [sc:children]
-sc_front
-sc_server
-sc_server_admin
+sc_webservers
+sc_appservers
+sc_manageservers
 
 # everything in the tc geo
 [tc:children]
-tc_server
+tc_appservers
 
 # everything in the zb geo
-[tc:children]
-zb_server
+[zb:children]
+zb_appservers

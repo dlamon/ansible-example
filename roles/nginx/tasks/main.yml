@@ -1,3 +1,5 @@
 ---
-- name: 测试
-  shell: "ls -ltra"
+- name: 下载 nginx 安装包
+  import_tasks: download.yml
+- name: 安装 nginx 安装包
+  import_tasks: install.yml
