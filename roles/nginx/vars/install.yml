@@ -1,1 +1,6 @@
-filesvr_url: http://www.google.com
+nginx_dependence_dirs:
+  - gcc
+  - gcc-c++
+  - openssl
+  - pcre
+  - zlib

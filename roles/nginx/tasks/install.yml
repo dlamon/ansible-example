@@ -2,6 +2,18 @@
   - name: 导入 install 变量
     include_vars:
       file: install.yml
-  - name: 输出 filesvr_url 变量
-    debug:
-      msg: "{{ filesvr_url }}"
+  - name: 安装 nginx 需要的依赖包
+    shell: "cd /root/{{ downloads_dir }}/{{ item }} && rpm -Uvh *.rpm --nodeps --force"
+    loop: "{{ nginx_dependence_dirs }}"
+  - name: 解压 nginx 安装包
+    shell: "cd /root/{{ downloads_dir }}/nginx && tar -xvf nginx-1.16.1.tar.gz"
+  - name: 安装 nginx
+    shell: "cd /root/{{ downloads_dir }}/nginx/nginx-1.16.1 && ./configure && make && make install"
+  - name: 创建 nginx service
+    template:
+      src: nginx.service
+      dest: /lib/systemd/system/nginx.service
+    notify:
+      - restart nginx service
+  - name: 检查 nginx 服务是否成功启动
+    service: name=nginx state=started
