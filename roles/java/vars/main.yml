@@ -1,0 +1,3 @@
+downloads_dir: downloads
+jdk_context: deploy-base/jdk
+jdk_file: jdk-8u241-linux-x64.tar.gz

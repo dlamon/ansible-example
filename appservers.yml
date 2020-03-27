@@ -1,0 +1,10 @@
+---
+  - hosts: appservers
+    gather_facts: no
+    any_errors_fatal: true
+    tasks:
+      - import_role:
+          name: java
+      - import_role:
+          name: ansible-server
+        tags: "version deploy"

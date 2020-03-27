@@ -1,11 +1,3 @@
-filesvr_url: http://file-server
-download_sub_dirs:
-  - gcc
-  - gcc-c++
-  - openssl
-  - pcre
-  - zlib
-  - nginx
 gcc_context: deploy-base/gcc
 gcc_files:
   - cpp-4.8.5-39.el7.x86_64.rpm

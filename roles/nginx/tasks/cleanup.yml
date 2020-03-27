@@ -1,0 +1,6 @@
+---
+  - name: 清理 nginx 安装包
+    file:
+      path: "/root/{{ downloads_dir }}/{{ item }}"
+      state: absent
+    loop: "{{ download_sub_dirs }}"

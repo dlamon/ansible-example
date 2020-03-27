@@ -1,0 +1,27 @@
+---
+  - name: 创建下载目录
+    file:
+      path: "~/{{ downloads_dir }}"
+      state: directory
+  - name: 下载 JDK
+    get_url:
+      url: "{{ filesvr_url }}/{{ jdk_context }}/{{ jdk_file }}"
+      dest: "~/{{ downloads_dir }}/{{ jdk_file }}"
+      force: yes
+  - name: 解压 JDK 到当前用户目录
+    unarchive:
+      src: "~/{{ downloads_dir }}/{{ jdk_file }}"
+      dest: "~/"
+      copy: no
+  - name: 拷贝环境变量配置文件
+    copy:
+      src: .bash_profile
+      dest: ~/
+  - name: 测试 JDK 是否配置成功
+    shell: "source ~/.bash_profile && java -version"
+    register: result
+    failed_when: " '1.8.0_241' not in result.stderr"
+  - name: 清理 JDK 临时文件
+    file:
+      path: "~/{{ downloads_dir }}/{{ jdk_file }}"
+      state: absent

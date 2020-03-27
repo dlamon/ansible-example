@@ -1,5 +1,15 @@
 ---
-- name: 下载 nginx 安装包
-  import_tasks: download.yml
-- name: 安装 nginx 安装包
-  import_tasks: install.yml
+  - name: 检查 nginx 是否启动
+    shell: "ps -ef | grep nginx"
+    register: result
+  - block:
+    - name: 下载 nginx 安装包
+      import_tasks: download.yml
+    - name: 安装 nginx
+      import_tasks: install.yml
+    - name: 清理 nginx 安装包
+      import_tasks: cleanup.yml
+    when: " 'nginx: worker process' not in result.stdout"
+  - debug:
+      msg: "nginx 服务已启动"
+    when: " 'nginx: worker process' in result.stdout"

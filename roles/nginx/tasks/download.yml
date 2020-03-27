@@ -2,6 +2,10 @@
   - name: 导入 download 变量
     include_vars:
       file: download.yml
+  - name: 创建下载目录
+    file:
+      path: "/root/{{ downloads_dir }}"
+      state: directory
   - name: 创建下载子目录
     file:
       path: "/root/{{ downloads_dir }}/{{ item }}"

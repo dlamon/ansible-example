@@ -1,0 +1,3 @@
+---
+  - name: ansible-server 测试
+    shell: "ls -ltr"

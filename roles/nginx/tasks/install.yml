@@ -15,5 +15,3 @@
       dest: /lib/systemd/system/nginx.service
     notify:
       - restart nginx service
-  - name: 检查 nginx 服务是否成功启动
-    service: name=nginx state=started
