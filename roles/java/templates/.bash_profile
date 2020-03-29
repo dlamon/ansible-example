@@ -2,7 +2,7 @@ export LANG=en_US.UTF-8
 export PS1='$LOGNAME:$PWD>'
 export TMOUT=0
 
-JAVA_HOME=/home/deploy/jdk1.8.0_241
+JAVA_HOME={{ java.install_dir }}
 export JAVA_HOME
 
 PATH=$JAVA_HOME/bin:$HOME/bin:$PATH

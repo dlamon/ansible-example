@@ -1,12 +1,11 @@
 ---
 - hosts: webservers
   gather_facts: no
+  remote_user: "{{ ansible_user }}"
   any_errors_fatal: true
   tasks:
     - import_role:
         name: nginx
-      become: yes
-      become_method: su
     - import_role:
         name: ansible-front
       tags: "version deploy"

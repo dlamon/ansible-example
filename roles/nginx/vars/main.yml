@@ -1,8 +1,7 @@
-downloads_dir: downloads
-download_sub_dirs:
-  - gcc
-  - gcc-c++
-  - openssl
-  - pcre
-  - zlib
-  - nginx
+---
+nginx:
+  install_dir: "{{ home }}/nginx"
+  process:
+    key: nginx
+    value: "nginx: master process"
+  port: 20080
