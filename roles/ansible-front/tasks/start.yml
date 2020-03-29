@@ -1,0 +1,27 @@
+---
+  - name: 启动 nginx 服务
+    shell: "{{ nginx.install_path }}/sbin/nginx -c {{ web.deploy_path }}/conf/nginx.conf"
+    tags: webservers:start
+
+  - name: 检查 nginx 服务是否启动
+    shell: "ps -ef | grep {{ nginx.process.key }}"
+    register: grep_nginx_result
+    failed_when: nginx.process.value not in grep_nginx_result.stdout
+    tags:
+      - webservers:start
+      - webservers:startcheck
+
+  - name: 检查 nginx 监听端口是否开启
+    shell: "netstat -tunl | grep {{ nginx.port }} | wc -l"
+    register: result
+    failed_when: grep_nginx_result.stdout == "0"
+    tags:
+      - webservers:start
+      - webservers:startcheck
+
+  - name: 输出检查结果
+    debug:
+      msg: "nginx 服务已启动"
+    tags:
+      - webservers:start
+      - webservers:startcheck

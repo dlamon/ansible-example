@@ -10,16 +10,28 @@
     become_method: su
 
   - name: 解压 pcre 压缩包
-    shell: "cd {{ home }}/downloads/tar && tar -zxvf {{ install.pcre.file }}"
+    unarchive:
+      src: "{{ home }}/downloads/tar/{{ install.pcre.file }}"
+      dest: "{{ home }}/downloads/tar/"
+      copy: no
 
   - name: 解压 zlib 压缩包
-    shell: "cd {{ home }}/downloads/tar && tar -zxvf {{ install.zlib.file }}"
+    unarchive:
+      src: "{{ home }}/downloads/tar/{{ install.zlib.file }}"
+      dest: "{{ home }}/downloads/tar/"
+      copy: no
 
   - name: 解压 openssl 压缩包
-    shell: "cd {{ home }}/downloads/tar && tar -zxvf {{ install.openssl.file }}"
+    unarchive:
+      src: "{{ home }}/downloads/tar/{{ install.openssl.file }}"
+      dest: "{{ home }}/downloads/tar/"
+      copy: no
 
   - name: 解压 nginx 安装包
-    shell: "cd {{ home }}/downloads/tar && tar -zxvf {{ install.nginx.file }}"
+    unarchive:
+      src: "{{ home }}/downloads/tar/{{ install.nginx.file }}"
+      dest: "{{ home }}/downloads/tar/"
+      copy: no
 
   - name: 安装 nginx
-    shell: "cd {{ home }}/downloads/tar/{{ install.nginx.unzip_dir }} && ./configure --prefix={{ nginx.install_dir }}  --with-pcre={{ home }}/downloads/tar/{{ install.pcre.unzip_dir }} --with-zlib={{ home }}/downloads/tar/{{ install.zlib.unzip_dir }} --with-openssl={{ home }}/downloads/tar/{{ install.openssl.unzip_dir }} --with-http_ssl_module  && make && make install"
+    shell: "cd {{ home }}/downloads/tar/{{ install.nginx.unzip_dir }} && ./configure --prefix={{ nginx.install_path }}  --with-pcre={{ home }}/downloads/tar/{{ install.pcre.unzip_dir }} --with-zlib={{ home }}/downloads/tar/{{ install.zlib.unzip_dir }} --with-openssl={{ home }}/downloads/tar/{{ install.openssl.unzip_dir }} --with-http_ssl_module  && make && make install"

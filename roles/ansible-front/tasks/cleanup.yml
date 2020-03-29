@@ -1,0 +1,8 @@
+---
+  - name: 删除下载版本
+    file:
+      path: "{{ home }}/downloads/{{ web.file }}"
+      state: absent
+  
+  - name: 删除 30 天前的备份文件
+    shell: "find {{ home }}/backup -mtime +30 -type f | xargs rm -rf"

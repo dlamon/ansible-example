@@ -2,10 +2,10 @@
   - name: 替换配置文件
     template:
       src: nginx.conf
-      dest: "{{ nginx.install_dir }}/conf/"
+      dest: "{{ nginx.install_path }}/conf/"
 
   - name: 启动 nginx 服务
-    shell: "{{ nginx.install_dir }}/sbin/nginx"
+    shell: "{{ nginx.install_path }}/sbin/nginx"
 
   - name: 检查 nginx 服务是否启动
     shell: "ps -ef | grep {{ nginx.process.key }}"
@@ -19,10 +19,10 @@
 
   - name: 输出检查结果
     debug:
-      msg: "nginx 服务已安装成功，服务启动正常"
+      msg: "nginx 服务已安装成功，启动正常"
   
   - name: 停止 nginx 服务
-    shell: "{{ nginx.install_dir }}/sbin/nginx -s quit"
+    shell: "{{ nginx.install_path }}/sbin/nginx -s quit"
   
   - name: 检查 nginx 服务是否停止
     shell: "ps -ef | grep {{ nginx.process.key }}"
@@ -36,4 +36,4 @@
 
   - name: 输出检查结果
     debug:
-      msg: "nginx 服务已安装成功，服务停止正常"
+      msg: "nginx 服务已安装成功，停止正常"

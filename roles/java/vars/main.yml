@@ -4,4 +4,4 @@ java:
   filesvr_path: deploy-base/java
   version: 1.8.0_241
   unzip_dir: jdk1.8.0_241
-  install_dir: "{{ home }}/java"
+  install_path: "{{ home }}/java"

@@ -1,0 +1,11 @@
+---
+  - name: 创建下载目录
+    file:
+      path: "{{ home }}/downloads"
+      state: directory
+  
+  - name: 下载部署版本
+    get_url:
+      url: "{{ filesvr_url }}/{{ web.filesvr_path }}/{{ web.file }}"
+      dest: "{{ home }}/downloads/{{ web.file }}"
+      force: yes

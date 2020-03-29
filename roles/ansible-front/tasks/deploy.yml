@@ -1,0 +1,25 @@
+---
+  - name: 删除旧版本
+    file:
+      path: "{{ web.deploy_path }}"
+      state: absent
+
+  - name: 创建部署目录
+    file:
+      path: "{{ item }}"
+      state: directory
+    loop:
+      - "{{ web.deploy_path }}/site"
+      - "{{ web.deploy_path }}/conf"
+      - "{{ web.deploy_path }}/cert"
+
+  - name: 解压新版本
+    unarchive:
+      src: "{{ home }}/downloads/{{ web.file }}"
+      dest: "{{ web.deploy_path }}/site/"
+      copy: no
+
+  - name: 上传配置文件
+    template:
+      src: nginx.conf
+      dest: "{{ web.deploy_path }}/conf/"
