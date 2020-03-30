@@ -1,35 +1,21 @@
 ---
-  - name: 创建下载目录
-    file:
-      path: "{{ home }}/downloads"
-      state: directory
+  - name: 检查 java 是否安装
+    stat:
+      path: "{{ java.install_path }}"
+    register: stat_result
 
-  - name: 下载 java 压缩包
-    get_url:
-      url: "{{ filesvr_url }}/{{ java.filesvr_path }}/{{ java.file }}"
-      dest: "{{ home }}/downloads/{{ java.file }}"
-      force: yes
+  - block:
+    - name: 下载 java 安装包
+      import_tasks: download.yml
+    - name: 安装 java
+      import_tasks: install.yml
+    - name: 检查 java 是否安装成功
+      import_tasks: check.yml
+    - name: 清理 java 安装包
+      import_tasks: cleanup.yml
+    when: stat_result.stat.exists == False
 
-  - name: 解压 java 到当前用户目录
-    unarchive:
-      src: "{{ home }}/downloads/{{ java.file }}"
-      dest: "{{ home }}/"
-      copy: no
-  
-  - name: 重命名 java 文件夹
-    shell: "mv {{ home }}/{{ java.unzip_dir }} {{ java.install_path }}"
-
-  - name: 设置环境变量
-    template:
-      src: .bash_profile
-      dest: "{{ home }}/"
-
-  - name: 测试 java 是否配置成功
-    shell: "source {{ home }}/.bash_profile && java -version"
-    register: result
-    failed_when: java.version not in result.stderr
-
-  - name: 清理 java 安装临时文件
-    file:
-      path: "{{ home }}/downloads/{{ java.file }}"
-      state: absent
+  - name: 输出已安装检查结果
+    debug:
+      msg: "java 已安装"
+    when: stat_result.stat.exists == True

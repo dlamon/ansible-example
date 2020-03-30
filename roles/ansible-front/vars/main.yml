@@ -6,6 +6,13 @@ nginx:
     value: "nginx: master process"
   port: 20080
   server_name: ansible-front
+  upstream:
+    apiserver:
+      "server  ansible-server-sc1:20000 weight=2;
+       server  ansible-server-sc2:20000 weight=2;
+       server  ansible-server-sc3:20000 weight=2;
+       server  ansible-server-tc1:20000;
+       server  ansible-server-zb1:20000 backup;"
 web:
   file: ansible-front-1.0.0.zip
   filesvr_path: deploy-app/ansible-front

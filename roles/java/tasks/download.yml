@@ -1,0 +1,11 @@
+---
+  - name: 创建下载目录
+    file:
+      path: "{{ home }}/downloads"
+      state: directory
+
+  - name: 下载 java 压缩包
+    get_url:
+      url: "{{ filesvr_url }}/{{ java.filesvr_path }}/{{ java.file }}"
+      dest: "{{ home }}/downloads/{{ java.file }}"
+      force: yes

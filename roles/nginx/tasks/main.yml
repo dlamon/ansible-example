@@ -1,7 +1,7 @@
 ---
   - name: 检查 nginx 是否安装
     stat:
-      path: "{{ nginx.install_path }}/sbin/nginx"
+      path: "{{ nginx.install_path }}"
     register: stat_result
 
   - block:
