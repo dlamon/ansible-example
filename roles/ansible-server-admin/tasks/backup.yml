@@ -5,11 +5,11 @@
     state: directory
   loop:
     - "{{ home }}/backup"
-    - "{{ admin.deploy_path }}"
+    - "{{ deploy_path }}"
 
 - name: 获取当前时间戳
   shell: "date +'%Y%m%d%H%M%S'"
   register: timestamp
 
 - name: 压缩备份版本包
-  shell: "cd {{ home }} && zip -r {{ home }}/backup/{{ admin.deploy_dir }}.{{ timestamp.stdout }}.zip {{ admin.deploy_dir }}"
+  shell: "cd {{ home }} && zip -r {{ home }}/backup/{{ deploy_dir }}.{{ timestamp.stdout }}.zip {{ deploy_dir }}"

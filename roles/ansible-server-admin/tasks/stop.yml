@@ -1,22 +1,19 @@
 ---
-- name: 查找 admin 服务进程
-  shell: "ps -ef | grep {{ admin.grep }} | grep -v grep | awk '${print $2}'"
-  register: grep_result
+- name: 查找正在运行的服务进程
+  shell: "ps -ef | grep {{ process_key }} | grep -v grep | awk '{print $2}'"
+  register: running_processes
 
-- name: 停止 admin 服务
-  shell: "kill -9 grep_result.stdout"
-  when: grep_result.stdout != ""
+- name: 停止正在运行的服务进程
+  shell: "kill -9 {{ item }}"
+  loop: "{{ running_processes.stdout_lines }}"
 
-- name: 检查 admin 服务是否停止
-  shell: "ps -ef | grep {{ admin.grep }} | grep -v grep"
-  register: grep_result
-  failed_when: admin.grep in grep_result.stdout
+- name: 检查服务进程是否停止
+  shell: "ps -ef | grep {{ process_key }} | grep -v grep | wc -l"
+  register: running_processes_count
+  failed_when: running_processes_count.stdout != "0"
 
-- name: 检查 admin 监听端口是否停止
-  shell: "netstat -tunl | grep {{ admin.port }} | wc -l"
-  register: netstat_result
-  failed_when: netstat_result.stdout != "0"
-
-- name: 输出检查结果
-  debug:
-    msg: "admin 服务已停止"
+- name: 检查监听端口是否关闭
+  wait_for:
+    port: "{{ server_port }}"
+    delay: 5
+    state: stopped

@@ -1,0 +1,18 @@
+---
+- name: 删除下载版本
+  file:
+    path: "{{ home }}/downloads/{{ deploy_file }}"
+    state: absent
+
+- name: 查找 30 天前的备份版本
+  find:
+    paths: "{{ home }}/backup"
+    age: 30d
+    recurse: yes
+  register: files_to_delete
+
+- name: 删除 30 天前的备份版本
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ files_to_delete.files }}"
