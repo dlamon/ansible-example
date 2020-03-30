@@ -1,3 +1,17 @@
 ---
 - name: ansible-server 测试
   shell: "ls -ltr"
+# - name: 获取版本
+#   import_tasks: download.yml
+# - name: 停止服务
+#   import_tasks: stop.yml
+# - name: 备份版本
+#   import_tasks: backup.yml
+# - name: 部署版本
+#   import_tasks: deploy.yml
+# - name: 启动服务
+#   import_tasks: start.yml
+# - name: 清除文件
+#   import_tasks: cleanup.yml
+# - debug:
+#     msg: "[{{ app.file }}] 部署成功"

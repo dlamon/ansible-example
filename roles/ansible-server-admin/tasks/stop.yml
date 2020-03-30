@@ -1,0 +1,22 @@
+---
+- name: 查找 admin 服务进程
+  shell: "ps -ef | grep {{ admin.grep }} | grep -v grep | awk '${print $2}'"
+  register: grep_result
+
+- name: 停止 admin 服务
+  shell: "kill -9 grep_result.stdout"
+  when: grep_result.stdout != ""
+
+- name: 检查 admin 服务是否停止
+  shell: "ps -ef | grep {{ admin.grep }} | grep -v grep"
+  register: grep_result
+  failed_when: admin.grep in grep_result.stdout
+
+- name: 检查 admin 监听端口是否停止
+  shell: "netstat -tunl | grep {{ admin.port }} | wc -l"
+  register: netstat_result
+  failed_when: netstat_result.stdout != "0"
+
+- name: 输出检查结果
+  debug:
+    msg: "admin 服务已停止"

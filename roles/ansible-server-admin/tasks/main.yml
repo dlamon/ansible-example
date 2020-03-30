@@ -12,4 +12,4 @@
 - name: 清除文件
   import_tasks: cleanup.yml
 - debug:
-    msg: "[{{ web.file }}] 部署成功"
+    msg: "[{{ admin.file }}] 部署成功"

@@ -1,0 +1,5 @@
+app:
+  file: ansible-server-0.0.1-SNAPSHOT.jar
+  filesvr_path: deploy-app/ansible-server
+  deploy_dir: ansible-server
+  deploy_path: "{{ home }}/ansible-server"

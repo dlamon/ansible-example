@@ -16,5 +16,5 @@ nginx:
 web:
   file: ansible-front-1.0.0.zip
   filesvr_path: deploy-app/ansible-front
-  deploy_dir: "ansible-front"
+  deploy_dir: ansible-front
   deploy_path: "{{ home }}/ansible-front"

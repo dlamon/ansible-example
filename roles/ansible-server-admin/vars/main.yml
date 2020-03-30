@@ -1,0 +1,7 @@
+admin:
+  file: ansible-server-admin-0.0.1-SNAPSHOT.jar
+  filesvr_path: deploy-app/ansible-server-admin
+  deploy_dir: ansible-server-admin
+  deploy_path: "{{ home }}/ansible-server-admin"
+  grep: cn.net.liaowei.ansible.server.admin.AnsibleServerAdminApplication
+  port: 20000

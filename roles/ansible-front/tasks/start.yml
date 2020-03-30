@@ -3,14 +3,14 @@
   shell: "{{ nginx.install_path }}/sbin/nginx -c {{ web.deploy_path }}/conf/nginx.conf"
 
 - name: 检查 nginx 服务是否启动
-  shell: "ps -ef | grep {{ nginx.process.key }}"
-  register: grep_nginx_result
-  failed_when: nginx.process.value not in grep_nginx_result.stdout
+  shell: "ps -ef | grep {{ nginx.process.key }} | grep -v grep"
+  register: grep_result
+  failed_when: nginx.process.value not in grep_result.stdout
 
 - name: 检查 nginx 监听端口是否开启
   shell: "netstat -tunl | grep {{ nginx.port }} | wc -l"
-  register: result
-  failed_when: grep_nginx_result.stdout == "0"
+  register: netstat_result
+  failed_when: netstat_result.stdout == "0"
 
 - name: 输出检查结果
   debug:
