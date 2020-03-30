@@ -1,15 +1,15 @@
 ---
-  - name: 创建备份目录
-    file:
-      path: "{{ item }}"
-      state: directory
-    loop:
-      - "{{ home }}/backup"
-      - "{{ web.deploy_path }}"
+- name: 创建备份目录
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ home }}/backup"
+    - "{{ web.deploy_path }}"
 
-  - name: 获取当前时间戳
-    shell: "date +'%Y%m%d%H%M%S'"
-    register: timestamp
-  
-  - name: 压缩备份版本包
-    shell: "cd {{ home }} && zip -r {{ home }}/backup/ansible-front.{{ timestamp.stdout }}.zip {{ web.deploy_dir }}"
+- name: 获取当前时间戳
+  shell: "date +'%Y%m%d%H%M%S'"
+  register: timestamp
+
+- name: 压缩备份版本包
+  shell: "cd {{ home }} && zip -r {{ home }}/backup/ansible-front.{{ timestamp.stdout }}.zip {{ web.deploy_dir }}"

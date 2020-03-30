@@ -1,5 +1,5 @@
 ---
-  - name: 测试 java 是否配置成功
-    shell: "source {{ home }}/.bash_profile && java -version"
-    register: result
-    failed_when: java.version not in result.stderr
+- name: 测试 java 是否配置成功
+  shell: "source {{ home }}/.bash_profile && java -version"
+  register: result
+  failed_when: java.version not in result.stderr

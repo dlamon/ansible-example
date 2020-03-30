@@ -1,37 +1,37 @@
 ---
-  - name: 导入 install 变量
-    include_vars:
-      file: install.yml
-      name: install
+- name: 导入 install 变量
+  include_vars:
+    file: install.yml
+    name: install
 
-  - name: 安装 nginx 需要的依赖包
-    shell: "cd {{ home }}/downloads/rpm && rpm -Uvh *.rpm --nodeps --force"
-    become: yes
-    become_method: su
+- name: 安装 nginx 需要的依赖包
+  shell: "cd {{ home }}/downloads/rpm && rpm -Uvh *.rpm --nodeps --force"
+  become: yes
+  become_method: su
 
-  - name: 解压 pcre 压缩包
-    unarchive:
-      src: "{{ home }}/downloads/tar/{{ install.pcre.file }}"
-      dest: "{{ home }}/downloads/tar/"
-      copy: no
+- name: 解压 pcre 压缩包
+  unarchive:
+    src: "{{ home }}/downloads/tar/{{ install.pcre.file }}"
+    dest: "{{ home }}/downloads/tar/"
+    copy: no
 
-  - name: 解压 zlib 压缩包
-    unarchive:
-      src: "{{ home }}/downloads/tar/{{ install.zlib.file }}"
-      dest: "{{ home }}/downloads/tar/"
-      copy: no
+- name: 解压 zlib 压缩包
+  unarchive:
+    src: "{{ home }}/downloads/tar/{{ install.zlib.file }}"
+    dest: "{{ home }}/downloads/tar/"
+    copy: no
 
-  - name: 解压 openssl 压缩包
-    unarchive:
-      src: "{{ home }}/downloads/tar/{{ install.openssl.file }}"
-      dest: "{{ home }}/downloads/tar/"
-      copy: no
+- name: 解压 openssl 压缩包
+  unarchive:
+    src: "{{ home }}/downloads/tar/{{ install.openssl.file }}"
+    dest: "{{ home }}/downloads/tar/"
+    copy: no
 
-  - name: 解压 nginx 安装包
-    unarchive:
-      src: "{{ home }}/downloads/tar/{{ install.nginx.file }}"
-      dest: "{{ home }}/downloads/tar/"
-      copy: no
+- name: 解压 nginx 安装包
+  unarchive:
+    src: "{{ home }}/downloads/tar/{{ install.nginx.file }}"
+    dest: "{{ home }}/downloads/tar/"
+    copy: no
 
-  - name: 安装 nginx
-    shell: "cd {{ home }}/downloads/tar/{{ install.nginx.unzip_dir }} && ./configure --prefix={{ nginx.install_path }}  --with-pcre={{ home }}/downloads/tar/{{ install.pcre.unzip_dir }} --with-zlib={{ home }}/downloads/tar/{{ install.zlib.unzip_dir }} --with-openssl={{ home }}/downloads/tar/{{ install.openssl.unzip_dir }} --with-http_ssl_module  && make && make install"
+- name: 安装 nginx
+  shell: "cd {{ home }}/downloads/tar/{{ install.nginx.unzip_dir }} && ./configure --prefix={{ nginx.install_path }}  --with-pcre={{ home }}/downloads/tar/{{ install.pcre.unzip_dir }} --with-zlib={{ home }}/downloads/tar/{{ install.zlib.unzip_dir }} --with-openssl={{ home }}/downloads/tar/{{ install.openssl.unzip_dir }} --with-http_ssl_module  && make && make install"

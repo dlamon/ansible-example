@@ -6,4 +6,4 @@
     - import_role:
         name: java
     - import_role:
-        name: ansible-server
+        name: ansible-server-admin

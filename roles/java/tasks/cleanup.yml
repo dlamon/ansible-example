@@ -1,5 +1,5 @@
 ---
-  - name: 清理 java 安装临时文件
-    file:
-      path: "{{ home }}/downloads/{{ java.file }}"
-      state: absent
+- name: 清理 java 安装临时文件
+  file:
+    path: "{{ home }}/downloads/{{ java.file }}"
+    state: absent

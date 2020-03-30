@@ -8,4 +8,3 @@
         name: nginx
     - import_role:
         name: ansible-front
-      tags: "version deploy"
