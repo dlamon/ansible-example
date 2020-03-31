@@ -1,12 +1,12 @@
 ---
 - name: 解压 java 到当前用户目录
   unarchive:
-    src: "{{ home }}/downloads/{{ java.file }}"
+    src: "{{ home }}/downloads/{{ install_file }}"
     dest: "{{ home }}/"
     copy: no
 
 - name: 重命名 java 文件夹
-  shell: "mv {{ home }}/{{ java.unzip_dir }} {{ java.install_path }}"
+  shell: "mv {{ home }}/{{ unzip_dir }} {{ install_path }}"
 
 - name: 设置环境变量
   template:

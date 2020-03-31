@@ -1,3 +1,4 @@
+---
 filesvr_path: deploy-app/ansible-server-admin
 deploy_dir: ansible-server-admin
 deploy_path: "{{ home }}/ansible-server-admin"

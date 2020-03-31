@@ -6,6 +6,6 @@
 
 - name: 下载 java 压缩包
   get_url:
-    url: "{{ filesvr_url }}/{{ java.filesvr_path }}/{{ java.file }}"
-    dest: "{{ home }}/downloads/{{ java.file }}"
+    url: "{{ filesvr_url }}/{{ filesvr_path }}/{{ install_file }}"
+    dest: "{{ home }}/downloads/{{ install_file }}"
     force: yes

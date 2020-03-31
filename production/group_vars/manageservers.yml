@@ -1,3 +1,4 @@
+---
 server_port: 21080
 active_profile: "prod"
 java_options: "-Xms2048m -Xmx4096m"

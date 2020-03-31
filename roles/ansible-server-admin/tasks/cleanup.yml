@@ -6,7 +6,8 @@
 
 - name: 查找 30 天前的备份版本
   find:
-    paths: "{{ home }}/backup"
+    paths:
+      - "{{ home }}/backup"
     age: 30d
     recurse: yes
   register: files_to_delete
