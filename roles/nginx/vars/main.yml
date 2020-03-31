@@ -1,7 +1,3 @@
 ---
-nginx:
-  install_path: "{{ home }}/nginx"
-  process:
-    key: nginx
-    value: "nginx: master process"
-  port: 8080
+install_path: "{{ home }}/nginx"
+server_port: 8080

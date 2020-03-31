@@ -4,7 +4,7 @@
     path: "{{ install_path }}"
   register: install_stat
 
-- name: "进入安装 java 主流程"
+- name: 进入安装 java 主流程
   block:
   - name: 下载 java 安装包
     import_tasks: download.yml

@@ -1,10 +1,11 @@
 ---
 - name: 检查 nginx 是否安装
   stat:
-    path: "{{ nginx.install_path }}"
-  register: stat_result
+    path: "{{ install_path }}"
+  register: install_stat
 
-- block:
+- name: 进入安装 nginx 主流程
+  block:
   - name: 下载 nginx 安装包
     import_tasks: download.yml
   - name: 安装 nginx
@@ -13,9 +14,9 @@
     import_tasks: check.yml
   - name: 清理 nginx 安装包
     import_tasks: cleanup.yml
-  when: stat_result.stat.exists == False
+  when: install_stat.stat.exists == False
 
 - name: 输出已安装检查结果
   debug:
     msg: "nginx 已安装"
-  when: stat_result.stat.exists == True
+  when: install_stat.stat.exists == True

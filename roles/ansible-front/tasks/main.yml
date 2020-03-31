@@ -11,5 +11,3 @@
   import_tasks: start.yml
 - name: 清除文件
   import_tasks: cleanup.yml
-- debug:
-    msg: "[{{ web.file }}] 部署成功"

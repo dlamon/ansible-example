@@ -1,17 +1,14 @@
 ---
-- name: 启动 nginx 服务
-  shell: "{{ nginx.install_path }}/sbin/nginx -c {{ web.deploy_path }}/conf/nginx.conf"
+- name: 启动服务
+  shell: "{{ nginx_install_path }}/sbin/nginx -c {{ deploy_path }}/conf/nginx.conf"
 
-- name: 检查 nginx 服务是否启动
-  shell: "ps -ef | grep {{ nginx.process.key }} | grep -v grep"
-  register: grep_result
-  failed_when: nginx.process.value not in grep_result.stdout
+- name: 检查服务进程是否启动
+  shell: "ps -ef | grep {{ deploy_path }}/conf/nginx.conf | grep -v grep | wc -l"
+  register: running_processes_count
+  failed_when: running_processes_count == "0"
 
-- name: 检查 nginx 监听端口是否开启
-  shell: "netstat -tunl | grep {{ nginx.port }} | wc -l"
-  register: netstat_result
-  failed_when: netstat_result.stdout == "0"
-
-- name: 输出检查结果
-  debug:
-    msg: "nginx 服务已启动"
+- name: 检查监听端口是否开启
+  wait_for:
+    port: "{{ server_port }}"
+    delay: 5
+    state: started

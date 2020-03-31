@@ -1,7 +1,7 @@
 ---
 gcc:
   filesvr_path: deploy-base/gcc
-  files:
+  install_files:
     - cpp-4.8.5-39.el7.x86_64.rpm
     - gcc-4.8.5-39.el7.x86_64.rpm
     - glibc-devel-2.17-292.el7.x86_64.rpm
@@ -13,18 +13,18 @@ gcc:
 
 gcc_c:
   filesvr_path: deploy-base/gcc-c++
-  files:
+  install_files:
     - gcc-c++-4.8.5-39.el7.x86_64.rpm
     - libstdc++-devel-4.8.5-39.el7.x86_64.rpm
 
 make:
   filesvr_path: deploy-base/make
-  files:
+  install_files:
     - make-3.82-24.el7.x86_64.rpm
 
 perl:
   filesvr_path: deploy-base/perl
-  files:
+  install_files:
     - groff-base-1.22.2-8.el7.x86_64.rpm
     - perl-5.16.3-294.el7_6.x86_64.rpm
     - perl-Carp-1.26-244.el7.noarch.rpm
@@ -56,16 +56,16 @@ perl:
 
 openssl:
   filesvr_path: deploy-base/openssl
-  file: openssl-1.0.2r.tar.gz
+  install_file: openssl-1.0.2r.tar.gz
 
 pcre:
   filesvr_path: deploy-base/pcre
-  file: pcre-8.43.tar.gz
+  install_file: pcre-8.43.tar.gz
 
 zlib:
   filesvr_path: deploy-base/zlib
-  file: zlib-1.2.11.tar.gz
+  install_file: zlib-1.2.11.tar.gz
 
 nginx:
   filesvr_path: deploy-base/nginx
-  file: nginx-1.16.1.tar.gz
+  install_file: nginx-1.16.1.tar.gz

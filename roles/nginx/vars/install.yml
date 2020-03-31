@@ -1,16 +1,16 @@
 ---
 pcre:
-  file: pcre-8.43.tar.gz
+  install_file: pcre-8.43.tar.gz
   unzip_dir: pcre-8.43
 
 zlib:
-  file: zlib-1.2.11.tar.gz
+  install_file: zlib-1.2.11.tar.gz
   unzip_dir: zlib-1.2.11
 
 openssl:
-  file: openssl-1.0.2r.tar.gz
+  install_file: openssl-1.0.2r.tar.gz
   unzip_dir: openssl-1.0.2r
 
 nginx:
-  file: nginx-1.16.1.tar.gz
+  install_file: nginx-1.16.1.tar.gz
   unzip_dir: nginx-1.16.1

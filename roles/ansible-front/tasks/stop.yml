@@ -1,22 +1,19 @@
 ---
-- name: 查找 nginx 服务进程
-  shell: "ps -ef | grep {{ nginx.process.key }}"
-  register: grep_result
+- name: 查找正在运行的服务进程
+  shell: "ps -ef | grep {{ deploy_path }}/conf/nginx.conf | grep -v grep | wc -l"
+  register: running_processes_count
 
-- name: 停止 nginx 服务
-  shell: "{{ nginx.install_path }}/sbin/nginx -s quit"
-  when: nginx.process.value in grep_result.stdout
+- name: 停止正在运行的服务进程
+  shell: "{{ nginx_install_path }}/sbin/nginx -c {{ deploy_path }}/conf/nginx.conf -s quit"
+  when: running_processes_count.stdout != "0"
 
-- name: 检查 nginx 服务是否停止
-  shell: "ps -ef | grep {{ nginx.process.key }} | grep -v grep"
-  register: grep_result
-  failed_when: nginx.process.value in grep_result.stdout
+- name: 检查服务进程是否停止
+  shell: "ps -ef | grep {{ deploy_path }}/conf/nginx.conf | grep -v grep | wc -l"
+  register: running_processes_count
+  failed_when: running_processes_count.stdout != "0"
 
-- name: 检查 nginx 监听端口是否停止
-  shell: "netstat -tunl | grep {{ nginx.port }} | wc -l"
-  register: netstat_result
-  failed_when: netstat_result.stdout != "0"
-
-- name: 输出检查结果
-  debug:
-    msg: "nginx 服务已停止"
+- name: 检查监听端口是否关闭
+  wait_for:
+    port: "{{ server_port }}"
+    delay: 5
+    state: stopped
