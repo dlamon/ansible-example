@@ -1,6 +1,7 @@
 ---
 - hosts: manageservers
   gather_facts: no
+  remote_user: "{{ group_all.ansible_user }}"
   any_errors_fatal: true
   tasks:
     - import_role:

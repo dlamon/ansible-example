@@ -1,5 +1,6 @@
 ---
-filesvr_path: deploy-app/ansible-front
-nginx_install_path: "{{ home }}/nginx"
-deploy_dir: ansible-front
-deploy_path: "{{ home }}/ansible-front"
+front:
+  filesvr_path: deploy-app/ansible-front
+  nginx_install_path: "{{ group_all.home }}/nginx"
+  deploy_dir: ansible-front
+  deploy_path: "{{ group_all.home }}/ansible-front"

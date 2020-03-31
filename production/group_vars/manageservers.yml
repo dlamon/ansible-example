@@ -1,5 +1,6 @@
 ---
-server_port: 21080
-active_profile: "prod"
-java_options: "-Xms2048m -Xmx4096m"
-deploy_file: ansible-server-admin-0.0.1-SNAPSHOT.jar
+group_manage:
+  server_port: 21080
+  active_profile: "prod"
+  java_options: "-Xms2048m -Xmx4096m"
+  deploy_file: ansible-server-admin-0.0.1-SNAPSHOT.jar

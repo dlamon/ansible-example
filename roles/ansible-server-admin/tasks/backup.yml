@@ -1,18 +1,18 @@
 ---
 - name: 检查部署目录是否存在
   stat:
-    path: "{{ deploy_path }}"
+    path: "{{ server_admin.deploy_path }}"
   register: deploy_stat
 
 - name: 进入备份主流程
   block:
   - name: 创建备份目录
     file:
-      path: "{{ home }}/backup"
+      path: "{{ group_all.home }}/backup"
       state: directory
   - name: 获取当前时间戳
     shell: "date +'%Y%m%d%H%M%S'"
     register: timestamp
   - name: 压缩备份版本包
-    shell: "cd {{ home }} && zip -r {{ home }}/backup/{{ deploy_dir }}.{{ timestamp.stdout }}.zip {{ deploy_dir }}"
+    shell: "cd {{ group_all.home }} && zip -r {{ group_all.home }}/backup/{{ server_admin.deploy_dir }}.{{ timestamp.stdout }}.zip {{ server_admin.deploy_dir }}"
   when: deploy_stat.stat.exists == True

@@ -1,13 +1,13 @@
 ---
 - name: 删除下载版本
   file:
-    path: "{{ home }}/downloads/{{ deploy_file }}"
+    path: "{{ group_all.home }}/downloads/{{ group_manage.deploy_file }}"
     state: absent
 
 - name: 查找 30 天前的备份版本
   find:
     paths:
-      - "{{ home }}/backup"
+      - "{{ group_all.home }}/backup"
     age: 30d
     recurse: yes
   register: files_to_delete

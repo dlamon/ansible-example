@@ -1,13 +1,13 @@
 ---
 - name: 删除旧版本
   file:
-    path: "{{ deploy_path }}"
+    path: "{{ server_admin.deploy_path }}"
     state: absent
 
 - name: 创建部署目录
   file:
-    path: "{{ deploy_path }}"
+    path: "{{ server_admin.deploy_path }}"
     state: directory
 
 - name: 更新版本
-  shell: "cp {{ home }}/downloads/{{ deploy_file }} {{ deploy_path }}/"
+  shell: "cp {{ group_all.home }}/downloads/{{ group_manage.deploy_file }} {{ server_admin.deploy_path }}/"

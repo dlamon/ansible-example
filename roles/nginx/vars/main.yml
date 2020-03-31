@@ -1,3 +1,4 @@
 ---
-install_path: "{{ home }}/nginx"
-server_port: 8080
+nginx:
+  install_path: "{{ group_all.home }}/nginx"
+  server_port: 8080

@@ -1,7 +1,7 @@
 ---
 - name: 删除旧版本
   file:
-    path: "{{ deploy_path }}"
+    path: "{{ front.deploy_path }}"
     state: absent
 
 - name: 创建部署目录
@@ -9,17 +9,17 @@
     path: "{{ item }}"
     state: directory
   loop:
-    - "{{ deploy_path }}/site"
-    - "{{ deploy_path }}/conf"
-    - "{{ deploy_path }}/cert"
+    - "{{ front.deploy_path }}/site"
+    - "{{ front.deploy_path }}/conf"
+    - "{{ front.deploy_path }}/cert"
 
 - name: 解压新版本
   unarchive:
-    src: "{{ home }}/downloads/{{ deploy_file }}"
-    dest: "{{ deploy_path }}/site/"
+    src: "{{ group_all.home }}/downloads/{{ group_web.deploy_file }}"
+    dest: "{{ front.deploy_path }}/site/"
     copy: no
 
 - name: 上传配置文件
   template:
     src: nginx.conf
-    dest: "{{ deploy_path }}/conf/"
+    dest: "{{ front.deploy_path }}/conf/"

@@ -1,8 +1,8 @@
 ---
 - name: 检查 java 是否安装
   stat:
-    path: "{{ install_path }}"
-  register: install_stat
+    path: "{{ java.install_path }}"
+  register: install_java_stat
 
 - name: 进入安装 java 主流程
   block:
@@ -14,4 +14,4 @@
     import_tasks: check.yml
   - name: 清理 java 安装包
     import_tasks: cleanup.yml
-  when: install_stat.stat.exists == False
+  when: install_java_stat.stat.exists == False

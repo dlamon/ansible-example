@@ -5,33 +5,33 @@
     name: install
 
 - name: 安装 nginx 需要的依赖包
-  shell: "cd {{ home }}/downloads/rpm && rpm -Uvh *.rpm --nodeps --force"
+  shell: "cd {{ group_all.home }}/downloads/rpm && rpm -Uvh *.rpm --nodeps --force"
   become: yes
   become_method: su
 
 - name: 解压 pcre 压缩包
   unarchive:
-    src: "{{ home }}/downloads/tar/{{ install.pcre.install_file }}"
-    dest: "{{ home }}/downloads/tar/"
+    src: "{{ group_all.home }}/downloads/tar/{{ install.pcre.install_file }}"
+    dest: "{{ group_all.home }}/downloads/tar/"
     copy: no
 
 - name: 解压 zlib 压缩包
   unarchive:
-    src: "{{ home }}/downloads/tar/{{ install.zlib.install_file }}"
-    dest: "{{ home }}/downloads/tar/"
+    src: "{{ group_all.home }}/downloads/tar/{{ install.zlib.install_file }}"
+    dest: "{{ group_all.home }}/downloads/tar/"
     copy: no
 
 - name: 解压 openssl 压缩包
   unarchive:
-    src: "{{ home }}/downloads/tar/{{ install.openssl.install_file }}"
-    dest: "{{ home }}/downloads/tar/"
+    src: "{{ group_all.home }}/downloads/tar/{{ install.openssl.install_file }}"
+    dest: "{{ group_all.home }}/downloads/tar/"
     copy: no
 
 - name: 解压 nginx 安装包
   unarchive:
-    src: "{{ home }}/downloads/tar/{{ install.nginx.install_file }}"
-    dest: "{{ home }}/downloads/tar/"
+    src: "{{ group_all.home }}/downloads/tar/{{ install.nginx.install_file }}"
+    dest: "{{ group_all.home }}/downloads/tar/"
     copy: no
 
 - name: 安装 nginx
-  shell: "cd {{ home }}/downloads/tar/{{ install.nginx.unzip_dir }} && ./configure --prefix={{ install_path }}  --with-pcre={{ home }}/downloads/tar/{{ install.pcre.unzip_dir }} --with-zlib={{ home }}/downloads/tar/{{ install.zlib.unzip_dir }} --with-openssl={{ home }}/downloads/tar/{{ install.openssl.unzip_dir }} --with-http_ssl_module  && make && make install"
+  shell: "cd {{ group_all.home }}/downloads/tar/{{ install.nginx.unzip_dir }} && ./configure --prefix={{ nginx.install_path }}  --with-pcre={{ group_all.home }}/downloads/tar/{{ install.pcre.unzip_dir }} --with-zlib={{ group_all.home }}/downloads/tar/{{ install.zlib.unzip_dir }} --with-openssl={{ group_all.home }}/downloads/tar/{{ install.openssl.unzip_dir }} --with-http_ssl_module  && make && make install"

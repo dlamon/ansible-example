@@ -6,63 +6,63 @@
 
 - name: 创建下载目录
   file:
-    path: "{{ home }}/downloads"
+    path: "{{ group_all.home }}/downloads"
     state: directory
 
 - name: 创建下载子目录
   file:
-    path: "{{ home }}/downloads/{{ item }}"
+    path: "{{ group_all.home }}/downloads/{{ item }}"
     state: directory
   loop: ["rpm", "tar"]
 
 - name: 下载 gcc 安装文件
   get_url:
-    url: "{{ filesvr_url }}/{{ download.gcc.filesvr_path }}/{{ item }}"
-    dest: "{{ home }}/downloads/rpm/{{ item }}"
+    url: "{{ group_all.filesvr_url }}/{{ download.gcc.filesvr_path }}/{{ item }}"
+    dest: "{{ group_all.home }}/downloads/rpm/{{ item }}"
     force: yes
   loop: "{{ download.gcc.install_files }}"
 
 - name: 下载 gcc-c++ 安装文件
   get_url:
-    url: "{{ filesvr_url }}/{{ download.gcc_c.filesvr_path }}/{{ item }}"
-    dest: "{{ home }}/downloads/rpm/{{ item }}"
+    url: "{{ group_all.filesvr_url }}/{{ download.gcc_c.filesvr_path }}/{{ item }}"
+    dest: "{{ group_all.home }}/downloads/rpm/{{ item }}"
     force: yes
   loop: "{{ download.gcc_c.install_files }}"
 
 - name: 下载 make 安装文件
   get_url:
-    url: "{{ filesvr_url }}/{{ download.make.filesvr_path }}/{{ item }}"
-    dest: "{{ home }}/downloads/rpm/{{ item }}"
+    url: "{{ group_all.filesvr_url }}/{{ download.make.filesvr_path }}/{{ item }}"
+    dest: "{{ group_all.home }}/downloads/rpm/{{ item }}"
     force: yes
   loop: "{{ download.make.install_files }}"
 
 - name: 下载 perl 安装文件
   get_url:
-    url: "{{ filesvr_url }}/{{ download.perl.filesvr_path }}/{{ item }}"
-    dest: "{{ home }}/downloads/rpm/{{ item }}"
+    url: "{{ group_all.filesvr_url }}/{{ download.perl.filesvr_path }}/{{ item }}"
+    dest: "{{ group_all.home }}/downloads/rpm/{{ item }}"
     force: yes
   loop: "{{ download.perl.install_files }}"
 
 - name: 下载 openssl 安装文件
   get_url:
-    url: "{{ filesvr_url }}/{{ download.openssl.filesvr_path }}/{{ download.openssl.install_file }}"
-    dest: "{{ home }}/downloads/tar/{{ download.openssl.install_file }}"
+    url: "{{ group_all.filesvr_url }}/{{ download.openssl.filesvr_path }}/{{ download.openssl.install_file }}"
+    dest: "{{ group_all.home }}/downloads/tar/{{ download.openssl.install_file }}"
     force: yes
 
 - name: 下载 pcre 安装文件
   get_url:
-    url: "{{ filesvr_url }}/{{ download.pcre.filesvr_path }}/{{ download.pcre.install_file }}"
-    dest: "{{ home }}/downloads/tar/{{ download.pcre.install_file }}"
+    url: "{{ group_all.filesvr_url }}/{{ download.pcre.filesvr_path }}/{{ download.pcre.install_file }}"
+    dest: "{{ group_all.home }}/downloads/tar/{{ download.pcre.install_file }}"
     force: yes
 
 - name: 下载 zlib 安装文件
   get_url:
-    url: "{{ filesvr_url }}/{{ download.zlib.filesvr_path }}/{{ download.zlib.install_file }}"
-    dest: "{{ home }}/downloads/tar/{{ download.zlib.install_file }}"
+    url: "{{ group_all.filesvr_url }}/{{ download.zlib.filesvr_path }}/{{ download.zlib.install_file }}"
+    dest: "{{ group_all.home }}/downloads/tar/{{ download.zlib.install_file }}"
     force: yes
 
 - name: 下载 nginx 安装文件
   get_url:
-    url: "{{ filesvr_url }}/{{ download.nginx.filesvr_path }}/{{ download.nginx.install_file }}"
-    dest: "{{ home }}/downloads/tar/{{ download.nginx.install_file }}"
+    url: "{{ group_all.filesvr_url }}/{{ download.nginx.filesvr_path }}/{{ download.nginx.install_file }}"
+    dest: "{{ group_all.home }}/downloads/tar/{{ download.nginx.install_file }}"
     force: yes

@@ -1,11 +1,11 @@
 ---
 - name: 创建下载目录
   file:
-    path: "{{ home }}/downloads"
+    path: "{{ group_all.home }}/downloads"
     state: directory
 
 - name: 下载部署版本
   get_url:
-    url: "{{ filesvr_url }}/{{ filesvr_path }}/{{ deploy_file }}"
-    dest: "{{ home }}/downloads/{{ deploy_file }}"
+    url: "{{ group_all.filesvr_url }}/{{ server_admin.filesvr_path }}/{{ group_manage.deploy_file }}"
+    dest: "{{ group_all.home }}/downloads/{{ group_manage.deploy_file }}"
     force: yes

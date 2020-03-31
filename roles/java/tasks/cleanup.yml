@@ -1,5 +1,5 @@
 ---
 - name: 清理 java 安装临时文件
   file:
-    path: "{{ home }}/downloads/{{ install_file }}"
+    path: "{{ group_all.home }}/downloads/{{ java.install_file }}"
     state: absent

@@ -1,5 +1,6 @@
 ---
-filesvr_path: deploy-app/ansible-server-admin
-deploy_dir: ansible-server-admin
-deploy_path: "{{ home }}/ansible-server-admin"
-process_key: ansible-server-admin
+server_admin:
+  filesvr_path: deploy-app/ansible-server-admin
+  deploy_dir: ansible-server-admin
+  deploy_path: "{{ group_all.home }}/ansible-server-admin"
+  process_key: ansible-server-admin

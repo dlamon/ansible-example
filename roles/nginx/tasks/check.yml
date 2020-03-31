@@ -2,10 +2,10 @@
 - name: 替换配置文件
   template:
     src: nginx.conf
-    dest: "{{ install_path }}/conf/"
+    dest: "{{ nginx.install_path }}/conf/"
 
 - name: 启动服务
-  shell: "{{ install_path }}/sbin/nginx"
+  shell: "{{ nginx.install_path }}/sbin/nginx"
 
 - name: 检查服务是否启动
   shell: "ps -ef | grep nginx | grep -v grep | wc -l"
@@ -14,12 +14,12 @@
 
 - name: 检查监听端口是否开启
   wait_for:
-    port: "{{ server_port }}"
+    port: "{{ nginx.server_port }}"
     delay: 5
     state: started
 
 - name: 停止服务
-  shell: "{{ install_path }}/sbin/nginx -s quit"
+  shell: "{{ nginx.install_path }}/sbin/nginx -s quit"
 
 - name: 检查服务是否停止
   shell: "ps -ef | grep nginx | grep -v grep | wc -l"
@@ -28,6 +28,6 @@
 
 - name: 检查监听端口是否关闭
   wait_for:
-    port: "{{ server_port }}"
+    port: "{{ nginx.server_port }}"
     delay: 5
     state: stopped

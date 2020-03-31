@@ -1,14 +1,14 @@
 ---
 - name: 启动服务
-  shell: "source {{ home }}/.bash_profile && cd {{ deploy_path }} && nohup java {{ java_options }} -jar {{ deploy_file }} --spring.profiles.active={{ active_profile }} &"
+  shell: "source {{ group_all.home }}/.bash_profile && cd {{ server_admin.deploy_path }} && nohup java {{ group_manage.java_options }} -jar {{ group_manage.deploy_file }} --spring.profiles.active={{ group_manage.active_profile }} &"
 
 - name: 检查服务进程是否启动
-  shell: "ps -ef | grep {{ process_key }} | grep -v grep | wc -l"
+  shell: "ps -ef | grep {{ server_admin.process_key }} | grep -v grep | wc -l"
   register: running_processes_count
   failed_when: running_processes_count.stdout == "0"
 
 - name: 检查监听端口是否开启
   wait_for:
-    port: "{{ server_port }}"
+    port: "{{ group_manage.server_port }}"
     delay: 5
     state: started
