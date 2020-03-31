@@ -15,8 +15,3 @@
   - name: 清理 nginx 安装包
     import_tasks: cleanup.yml
   when: install_nginx_stat.stat.exists == False
-
-- name: 输出已安装检查结果
-  debug:
-    msg: "nginx 已安装"
-  when: install_nginx_stat.stat.exists == True
