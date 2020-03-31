@@ -6,12 +6,12 @@
 
 - name: 进入安装 nginx 主流程
   block:
-  - name: 下载 nginx 安装包
+  - name: 下载安装包
     import_tasks: download.yml
-  - name: 安装 nginx
+  - name: 进行安装
     import_tasks: install.yml
-  - name: 检查 nginx 是否安装成功
+  - name: 检查是否安装成功
     import_tasks: check.yml
-  - name: 清理 nginx 安装包
+  - name: 清理安装包
     import_tasks: cleanup.yml
   when: install_nginx_stat.stat.exists == False

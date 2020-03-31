@@ -6,12 +6,12 @@
 
 - name: 进入安装 java 主流程
   block:
-  - name: 下载 java 安装包
+  - name: 下载安装包
     import_tasks: download.yml
-  - name: 安装 java
+  - name: 进行安装
     import_tasks: install.yml
-  - name: 检查 java 是否安装成功
+  - name: 检查是否安装成功
     import_tasks: check.yml
-  - name: 清理 java 安装包
+  - name: 清理安装包
     import_tasks: cleanup.yml
   when: install_java_stat.stat.exists == False
