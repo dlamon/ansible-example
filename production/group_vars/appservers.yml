@@ -1,0 +1,6 @@
+---
+group_app:
+  server_port: 20000
+  active_profile: "prod"
+  java_options: "-Xms2048m -Xmx4096m"
+  deploy_file: ansible-server-0.0.1-SNAPSHOT.jar

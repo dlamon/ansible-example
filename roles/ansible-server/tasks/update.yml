@@ -1,0 +1,13 @@
+---
+- name: 删除旧版本
+  file:
+    path: "{{ server.deploy_path }}"
+    state: absent
+
+- name: 创建部署目录
+  file:
+    path: "{{ server.deploy_path }}"
+    state: directory
+
+- name: 更新版本
+  shell: "cp {{ group_all.home }}/downloads/{{ group_app.deploy_file }} {{ server.deploy_path }}/"

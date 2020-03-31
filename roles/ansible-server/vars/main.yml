@@ -1,5 +1,6 @@
-app:
-  file: ansible-server-0.0.1-SNAPSHOT.jar
+---
+server:
   filesvr_path: deploy-app/ansible-server
   deploy_dir: ansible-server
-  deploy_path: "{{ home }}/ansible-server"
+  deploy_path: "{{ group_all.home }}/ansible-server"
+  process_key: ansible-server
