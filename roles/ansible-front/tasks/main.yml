@@ -5,6 +5,7 @@
   import_tasks: stop.yml
 - name: 备份版本
   import_tasks: backup.yml
+  run_once: true
 - name: 更新版本
   import_tasks: update.yml
 - name: 启动服务
