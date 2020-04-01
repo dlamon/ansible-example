@@ -1,4 +1,4 @@
 ---
 - import_playbook: webservers.yml
 - import_playbook: appservers.yml
-- import_playbook: adminservers.yml
+- import_playbook: manageservers.yml
