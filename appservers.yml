@@ -1,5 +1,16 @@
 ---
-- hosts: appservers
+- hosts: sc_appservers
+  gather_facts: no
+  remote_user: "{{ group_all.ansible_user }}"
+  any_errors_fatal: true
+  serial: [1, 100%]
+  tasks:
+    - import_role:
+        name: java
+    - import_role:
+        name: ansible-server
+
+- hosts: tc_appservers, zb_appservers
   gather_facts: no
   remote_user: "{{ group_all.ansible_user }}"
   any_errors_fatal: true
