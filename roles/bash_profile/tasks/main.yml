@@ -1,0 +1,5 @@
+---
+- name: 设置环境变量
+  template:
+    src: .bash_profile
+    dest: "{{ group_all.home }}/"
